@@ -1,9 +1,25 @@
 import streamlit as st
 
 
-st.title("Калькулятор!")
+st.title("Добрый день!")
 
-val_1 = st.number_input("Insert a number", key="val_1")
-val_2 = st.number_input("Insert a number", key="val_2")
+fist_name = st.text_input("Set first name: ")
+last_name = st.text_input("Set last name: ")
 
-st.write(f"Результат: {val_1 + val_2}")
+if fist_name == "" and last_name == "":
+    message = "Привет!"
+else:  
+    message = f"Привет, {fist_name} {last_name}!"
+
+st.write(message)
+
+if "show_text" not in st.session_state:
+    st.session_state.show_text = False
+
+def show_handler():
+    st.session_state.show_text = not st.session_state.show_text
+
+st.button("**Кликни, чтобы получить текст!**", on_click=show_handler)
+
+if st.session_state.show_text:
+    st.write("Спрятанное сообщение")
